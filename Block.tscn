@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0qf6mrv45fo6"]
+
+[ext_resource type="Script" path="res://block.gd" id="1_03gee"]
+[ext_resource type="FontFile" uid="uid://bop78ykif6ihs" path="res://Assets/FredokaOne-Regular.ttf" id="1_o05m6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gb612"]
+size = Vector2(108, 108)
+
+[node name="Block" type="Control"]
+custom_minimum_size = Vector2(108, 108)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_03gee")
+colors = Array[Color]([Color(0.540252, 0.229388, 0.204493, 1), Color(0.339431, 0.386739, 0.117948, 1), Color(0.053803, 0.261667, 0.251192, 1), Color(0, 0, 0, 1), Color(0.7228, 0.507717, 0.0331378, 1), Color(0.835047, 0.171604, 0.177535, 1)])
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.941176, 0.607843, 0.615686, 1)
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_o05m6")
+theme_override_font_sizes/font_size = 70
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(54, 54)
+shape = SubResource("RectangleShape2D_gb612")
