@@ -1,4 +1,5 @@
 extends Area2D
 
 func _process(delta: float) -> void:
-	position.y -= get_parent().bullet_speed * delta
+	if get_parent().get_node("GameOverUI").is_game_over == false:
+		position.y -= get_parent().bullet_speed * delta

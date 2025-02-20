@@ -12,4 +12,18 @@ func _ready() -> void:
 	$HealthLabel.text = str(health)
 
 func _process(delta: float) -> void:
-	position.y += get_parent().blocks_speed * delta
+	if get_parent().get_node("GameOverUI").is_game_over == false:
+		position.y += get_parent().blocks_speed * delta
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Bullet"):
+		health -= 1
+		$HealthLabel.text = str(health)
+		area.queue_free()
+		get_parent().score_increased()
+		
+		if health <= 0:
+			get_parent().time = 10
+			get_parent().update_time_text()
+			queue_free()
