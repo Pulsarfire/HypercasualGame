@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0qf6mrv45fo6"]
+[gd_scene load_steps=6 format=3 uid="uid://d0qf6mrv45fo6"]
 
 [ext_resource type="Script" path="res://block.gd" id="1_03gee"]
 [ext_resource type="FontFile" uid="uid://bop78ykif6ihs" path="res://Assets/FredokaOne-Regular.ttf" id="1_o05m6"]
+[ext_resource type="Texture2D" uid="uid://bgj03wfcci560" path="res://Assets/Circle.png" id="3_3eptb"]
+
+[sub_resource type="Curve" id="Curve_d2qjo"]
+_data = [Vector2(0.00803213, 1), 0.0, 0.0, 0, 0, Vector2(0.971888, 0.00252962), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gb612"]
 size = Vector2(108, 108)
@@ -35,10 +40,25 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Particles" type="CPUParticles2D" parent="."]
+top_level = true
+emitting = false
+amount = 25
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("3_3eptb")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 400.0
+initial_velocity_max = 400.0
+scale_amount_curve = SubResource("Curve_d2qjo")
+
 [node name="Area2D" type="Area2D" parent="." groups=["Block"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(54, 54)
 shape = SubResource("RectangleShape2D_gb612")
 
+[connection signal="finished" from="Particles" to="." method="_on_particles_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

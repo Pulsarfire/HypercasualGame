@@ -50,3 +50,12 @@ func _on_timer_timeout() -> void:
 		update_time_text()
 	if time == 0:
 		$GameOverUI.game_over()
+
+
+func _on_progression_timer_timeout() -> void:
+	if blocks_amount_to_instantiate <= 2:
+		blocks_amount_to_instantiate += 1
+		bullet_speed *= 2
+		min_blocks_health *= 2
+		max_blocks_health *= 1.5
+		$FireRateTimer.wait_time /= 1.5
